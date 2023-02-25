@@ -3,7 +3,7 @@ from .models import Dog
 
 # Home View
 def home(request):
-    return render(request, 'dogs/index.html', { 'dogs': dogs })
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
