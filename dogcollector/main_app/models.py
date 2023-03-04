@@ -23,6 +23,7 @@ class Dog(models.Model):
     breed = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    toys = models.ManyToManyField(Toy)
 
     def __str__(self):
         return self.name
@@ -31,7 +32,7 @@ class Dog(models.Model):
         return reverse('detail', kwargs={'dog_id': self.id})
     
     def fed_for_today(self):
-        return len( self.feeding_set.filter(date=date.today()) )
+        return self.feeding_set.filter(date=date.today()).count() >= 2
 
 class Feeding(models.Model):
     date = models.DateField('feeding date')
