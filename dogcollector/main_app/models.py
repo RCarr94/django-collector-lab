@@ -8,6 +8,16 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+class Toy(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('toys_detail', kwargs={'pk': self.id})
+
 class Dog(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
@@ -22,7 +32,6 @@ class Dog(models.Model):
     
     def fed_for_today(self):
         return len( self.feeding_set.filter(date=date.today()) )
-
 
 class Feeding(models.Model):
     date = models.DateField('feeding date')
